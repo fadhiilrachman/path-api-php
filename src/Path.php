@@ -160,26 +160,26 @@ class Path extends \FadhiilRachman\Path\PathException
 		return $request;
 	}
 
-    protected function buildBody($data, $boundary=false) {
-    	if(!$boundary) {
+	protected function buildBody($data, $boundary=false) {
+		if(!$boundary) {
 			$this->boundary=mt_rand(10000000000000,10000000000000);
-    	} else {
+		} else {
 			$this->boundary=$boundary;
-    	}
-        $body = '';
-        //foreach ($bodies as $b) {
-        	array_push($this->header, 'Content-Type: multipart/form-data; boundary='.$this->boundary);
-            $body .= '--'.$this->boundary."\r\n";
-            $body .= 'Content-Disposition: form-data; name="post"'."\r\n";
-            $body .= 'Content-Type: text/plain; charset=UTF-8'."\r\n";
-            $body .= 'Content-Transfer-Encoding: 8bit'."\r\n";
+		}
+		$body = '';
+		//foreach ($bodies as $b) {
+		array_push($this->header, 'Content-Type: multipart/form-data; boundary='.$this->boundary);
+		$body .= '--'.$this->boundary."\r\n";
+		$body .= 'Content-Disposition: form-data; name="post"'."\r\n";
+		$body .= 'Content-Type: text/plain; charset=UTF-8'."\r\n";
+		$body .= 'Content-Transfer-Encoding: 8bit'."\r\n";
 
-            $body .= "\r\n\r\n".json_encode($data, true)."\r\n";
-        //}
-        $body .= '--'.$this->boundary.'--';
+		$body .= "\r\n\r\n".json_encode($data, true)."\r\n";
+		//}
+		$body .= '--'.$this->boundary.'--';
 
-        return $body;
-    }
+		return $body;
+	}
 
 	protected function request($endpoint, $param=false, $post=false) {
 		$curl = curl_init();
