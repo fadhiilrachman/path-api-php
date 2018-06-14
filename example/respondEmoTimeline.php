@@ -4,7 +4,11 @@
 // use at your own risk!
 
 require_once 'vendor\autoload.php';
+<<<<<<< HEAD
 use \FadhiilRachman\Path;
+=======
+use \FadhiilRachman\Path As Path;
+>>>>>>> 4ed79e8283e4b9cca92d18efd1cf7f973a3483b1
 
 $email='YOUR_PATH_EMAIL';
 $password='YOUR_PATH_PASSWORD';
