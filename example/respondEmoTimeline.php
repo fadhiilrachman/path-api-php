@@ -3,7 +3,7 @@
 // This is example for auto respond timeline with emoticon
 // use at your own risk!
 
-require_once '../src/Path.php';
+require_once 'vendor\autoload.php';
 use \FadhiilRachman\Path As Path;
 
 $email='YOUR_PATH_EMAIL';
