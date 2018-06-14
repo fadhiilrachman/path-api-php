@@ -1,17 +1,18 @@
 {
-	"name": "fadhiilrachman/path-api",
-	"type": "library",
-	"description": "An easy-to-use PHP Class for accessing Path's private API.",
+    "name": "fadhiilrachman/path-api",
+    "type": "library",
+    "description": "An easy-to-use PHP Class for accessing Path's private API.",
 	"keywords": ["path", "api"],
 	"homepage": "https://github.com/fadhiilrachman/path-api-php",
 	"license": "MIT",
-	"authors": [
-		{
-			"name": "Fadhiil Rachman",
-			"homepage": "https://github.com/fadhiilrachman"
-		}
-	],
-	"require": {
+    "authors": [
+        {
+            "name": "Fadhiil Rachman",
+            "email": "fadhiilrachman@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
 		"php": "^5.6.0 || ^7.0",
 		"ext-curl": "*"
 	},
@@ -19,7 +20,5 @@
 		"psr-4": {
 			"FadhiilRachman\\Path\\": "src"
 		}
-	},
-	"minimum-stability": "dev",
-	"prefer-stable": true
+	}
 }
