@@ -3,7 +3,7 @@
 /**
 * Path Private API PHP
 * @author Fadhiil Rachman <https://www.instagram.com/fadhiilrachman>
-* @version 0.0.1
+* @version 0.0.2
 * @license https://github.com/fadhiilrachman/path-api-php/blob/master/LICENSE The MIT License
 */
 
@@ -12,7 +12,7 @@ namespace FadhiilRachman\Path;
 use \FadhiilRachman\Path\Constants;
 use \FadhiilRachman\Path\PathException;
 
-class Path extends \FadhiilRachman\Path\PathException
+class Path extends PathException
 {
 	protected $email;
 	protected $password;
@@ -29,11 +29,11 @@ class Path extends \FadhiilRachman\Path\PathException
 		$this->email = $email;
 		$this->password = $password;
 
-		if (!file_exists( 'cache' )) {
-			mkdir('cache/' , 0777);
-		}
+		$this->pathData = __DIR__ . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR;
 
-		$this->pathData = __DIR__ . DIRECTORY_SEPARATOR . 'cache/';
+		if (!file_exists( $this->pathData )) {
+			mkdir($this->pathData , 0777);
+		}
 
 		if ((file_exists($this->pathData."$this->email-userId.log")) && (file_exists($this->pathData."$this->email-token.log"))) {
 
@@ -162,7 +162,7 @@ class Path extends \FadhiilRachman\Path\PathException
 
 	protected function buildBody($data, $boundary=false) {
 		if(!$boundary) {
-			$this->boundary=mt_rand(10000000000000,10000000000000);
+			$this->boundary=mt_rand(10000,mt_getrandmax());
 		} else {
 			$this->boundary=$boundary;
 		}
@@ -185,14 +185,14 @@ class Path extends \FadhiilRachman\Path\PathException
 		$curl = curl_init();
 		array_push($this->header, 'X-PATH-VERSION-CODE: ' . Constants::PATH_VERSION);
 		array_push($this->header, 'X-PATH-TIMEZONE: ' . Constants::PATH_TIMEZONE);
-		array_push($this->header, 'X-PATH-REQUEST-ID: A_'.mt_rand(10000000000000,10000000000000).'_'.mt_rand(1,10));
+		array_push($this->header, 'X-PATH-REQUEST-ID: A_'.mt_rand(10000,mt_getrandmax()).'_'.mt_rand(1,10));
 		curl_setopt($curl, CURLOPT_USERAGENT, Constants::USER_AGENT);
 		curl_setopt_array($curl, array(
 			CURLOPT_URL				=> Constants::API_URL . $endpoint . ( $param ? '?'.http_build_query($param) : ''),
 			CURLOPT_HTTPHEADER		=> $this->header,
 			CURLOPT_USERAGENT		=> Constants::USER_AGENT,
 			CURLOPT_RETURNTRANSFER	=> 1,
-			CURLOPT_VERBOSE			=> 1,
+			CURLOPT_VERBOSE			=> 0,
 			CURLOPT_SSL_VERIFYHOST	=> 0,
 			CURLOPT_SSL_VERIFYPEER	=> 0
 		));

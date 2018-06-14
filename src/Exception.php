@@ -3,7 +3,7 @@
 /**
 * Path Private API PHP
 * @author Fadhiil Rachman <https://www.instagram.com/fadhiilrachman>
-* @version 0.0.1
+* @version 0.0.2
 * @license https://github.com/fadhiilrachman/path-api-php/blob/master/LICENSE The MIT License
 */
 
