@@ -30,7 +30,7 @@ try {
 			$moment_id=$data["id"];
 			if($moment_id) {
 				$dir = __DIR__ . DIRECTORY_SEPARATOR . "data" . DIRECTORY_SEPARATOR;
-				if (!file_exists( 'data' )) {
+				if (!file_exists( $dir )) {
 					mkdir($dir , 0777);
 				}
 				$log=$dir . $userId . '_respondEmoTimeline.log';
