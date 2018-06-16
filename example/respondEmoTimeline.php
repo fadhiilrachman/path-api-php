@@ -11,7 +11,7 @@ $password='YOUR_PATH_PASSWORD';
 $limit=50;
 $type=mt_rand(1,5);
 
-$path = new \FadhiilRachman\Path\Path($email, $password);
+$path = new \Path\Path($email, $password);
 
 try {
 	$relogin=false;
