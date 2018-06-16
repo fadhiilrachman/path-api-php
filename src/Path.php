@@ -21,6 +21,7 @@ class Path extends PathException
 	public $user_id;
 	public $user_token;
 	public $pathData;
+	
 	protected $boundary;
 	protected $header=[];
 	
@@ -49,7 +50,7 @@ class Path extends PathException
 			$data=[
 				"login"				=> $this->email,
 				"password"			=> $this->password,
-				"reactivate_user"	=> 1,
+				"reactivate_user"		=> 1,
 				"client_id"			=> Constants::CLIENT_ID
 			];
 			$formBody=$this->buildBody($data);
@@ -77,7 +78,7 @@ class Path extends PathException
 			return ;
 		}
 		$data=[
-			"user_ids"					=> $user_id,
+			"user_ids"				=> $user_id,
 			"oauth_token"				=> $this->user_token,
 		];
 		$formBody=$this->buildBody($data);
@@ -116,10 +117,10 @@ class Path extends PathException
 				break;
 		}
 		$data=[
-			"moment_id"					=> $moment_id,
+			"moment_id"				=> $moment_id,
 			"emotion_type"				=> $emo_type,
 			"extra_emotions"			=> $emo_extra,
-			"emotions_with_comments"	=> $emotions_with_comments,
+			"emotions_with_comments"		=> $emotions_with_comments,
 			"oauth_token"				=> $this->user_token,
 		];
 		if ($location) {
@@ -145,9 +146,9 @@ class Path extends PathException
 			return ;
 		}
 		$data=[
-			'limit'						=>	"$limit",
-			'gs'						=>	'1',
-			'emotions_with_comments'	=>	'true',
+			'limit'					=>	"$limit",
+			'gs'					=>	'1',
+			'emotions_with_comments'		=>	'true',
 			'connection_type'			=>	'WIFI',
 			'oauth_token'				=>	$this->user_token,
 			'newer_than'				=>	"$newer_than",
@@ -167,15 +168,14 @@ class Path extends PathException
 			$this->boundary=$boundary;
 		}
 		$body = '';
-		//foreach ($bodies as $b) {
 		array_push($this->header, 'Content-Type: multipart/form-data; boundary='.$this->boundary);
+		
 		$body .= '--'.$this->boundary."\r\n";
 		$body .= 'Content-Disposition: form-data; name="post"'."\r\n";
 		$body .= 'Content-Type: text/plain; charset=UTF-8'."\r\n";
 		$body .= 'Content-Transfer-Encoding: 8bit'."\r\n";
 
 		$body .= "\r\n\r\n".json_encode($data, true)."\r\n";
-		//}
 		$body .= '--'.$this->boundary.'--';
 
 		return $body;
@@ -188,13 +188,13 @@ class Path extends PathException
 		array_push($this->header, 'X-PATH-REQUEST-ID: A_'.mt_rand(10000,mt_getrandmax()).'_'.mt_rand(1,10));
 		curl_setopt($curl, CURLOPT_USERAGENT, Constants::USER_AGENT);
 		curl_setopt_array($curl, array(
-			CURLOPT_URL				=> Constants::API_URL . $endpoint . ( $param ? '?'.http_build_query($param) : ''),
+			CURLOPT_URL			=> Constants::API_URL . $endpoint . ( $param ? '?'.http_build_query($param) : ''),
 			CURLOPT_HTTPHEADER		=> $this->header,
 			CURLOPT_USERAGENT		=> Constants::USER_AGENT,
-			CURLOPT_RETURNTRANSFER	=> 1,
+			CURLOPT_RETURNTRANSFER		=> 1,
 			CURLOPT_VERBOSE			=> 0,
-			CURLOPT_SSL_VERIFYHOST	=> 0,
-			CURLOPT_SSL_VERIFYPEER	=> 0
+			CURLOPT_SSL_VERIFYHOST		=> 0,
+			CURLOPT_SSL_VERIFYPEER		=> 0
 		));
 		if ($post) {
 			curl_setopt($curl, CURLOPT_POST, 1);
@@ -202,7 +202,7 @@ class Path extends PathException
 		}
 		$data = curl_exec($curl);
 		if(!$data) {
-			throw new PathException('Curl has been crashed', 500);
+			throw new PathException('cUrl has been crashed', 500);
 			return ;
 		}
 		curl_close($curl);
