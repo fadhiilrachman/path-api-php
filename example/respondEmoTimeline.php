@@ -14,11 +14,7 @@ $type=mt_rand(1,5);
 $path = new \Path\Path($email, $password);
 
 try {
-	$relogin=false;
-	if (isset($_GET['relogin'])) {
-		$relogin=true;
-	}
-	$login = $path->login($relogin);
+	$login = $path->login();
 	if($login) {
 		$feedHome = $path->feedHome($limit, false)["moments"];
 		if($feedHome=='') {
